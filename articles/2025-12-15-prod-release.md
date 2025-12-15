@@ -9,7 +9,7 @@ published: false
 
 GitHub Actions は非常に便利な CI/CD 基盤ですが、設定次第では**本番デプロイの権限が想像以上に緩くなってしまう**ことがあります。
 
-本記事では、GitHub Actions と AWS OIDC を利用した既存のデプロイフローにおいて、
+本記事では、GitHub Actions と AWS OIDC を利用した既存のデプロイフローにおいて
 
 * どの点にリスクを感じていたか
 * どのような対策をしたか
@@ -73,11 +73,11 @@ jobs:
 Environments を使うことで環境ごとに env/secrets を設定できたり、[Deploy 時のレビュワーの必須にでき](https://docs.github.com/ja/actions/reference/workflows-and-actions/deployments-and-environments#required-reviewers)たりします。
 
 具体的には、**Repository Settings → Environments** から `production` Environment を作成し、
-以下の設定を行いました。
+以下の設定しました。
 
 ![](/images/2025-12-15-prod-release/env-settings.png)
 
-これにより指定したレビュワーが承認するまでデプロイすることができなくなります。
+これにより指定したレビュワーが承認するまでデプロイできなくなります。
 （↓ レビュー承認待ちの workflow）
 
 ![レビュー承認待ちの workflow](/images/2025-12-15-prod-release/waiting-deploy-review.png)
