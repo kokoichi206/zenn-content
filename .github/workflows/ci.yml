@@ -4,6 +4,11 @@ on:
     paths:
       - 'articles/**/*.md'
 
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
