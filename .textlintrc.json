@@ -1,0 +1,63 @@
+{
+  "plugins": {
+    "@textlint/markdown": {
+      "extensions": [
+        ".md"
+      ]
+    }
+  },
+  "rules": {
+    "ja-space-between-half-and-full-width": {
+      "space": "always"
+    },
+    "preset-ja-technical-writing": {
+      "ja-unnatural-alphabet": {
+        "allow": [
+          "a",
+          "i",
+          "u",
+          "e",
+          "o",
+          "n",
+          "/[A-Z]/",
+          "/[WwＷｗ]+/$"
+        ],
+        "allowCommonCase": true
+      },
+      "ja-no-mixed-period": {
+        "allowEmojiAtEnd": true,
+        "allowPeriodMarks": [
+          "…",
+          ".",
+          "。",
+          "w",
+          "ｗ",
+          "W",
+          "Ｗ"
+        ]
+      },
+      "ja-no-successive-word": {
+        "allow": [
+          "・",
+          "！",
+          "!",
+          "？",
+          "?",
+          "…",
+          "○",
+          "◯",
+          "w",
+          "ｗ",
+          "W",
+          "Ｗ",
+          "。"
+        ]
+      },
+      "no-doubled-joshi": {},
+      "no-exclamation-question-mark": false,
+      "sentence-length": {
+        "max": 150
+      }
+    }
+  }
+}
