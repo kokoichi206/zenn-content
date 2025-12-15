@@ -1,0 +1,26 @@
+name: ci
+on:
+  pull_request:
+    paths:
+      - 'articles/**/*.md'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1
+
+      - name: Check lint and report
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1
+          npx textlint --format checkstyle $(git diff --name-only origin/${{ github.event.pull_request.base.ref }} HEAD | grep '^articles/.*\.md') |\
+            reviewdog -f=checkstyle -name="textlint" -reporter=github-pr-review --fail-on-error=true -filter-mode=added
