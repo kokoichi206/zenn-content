@@ -7,6 +7,10 @@ publication_name: "japagate"
 published: true
 ---
 
+:::message
+この記事は、ジャパゲートシステムズ Advent Calendar 2025 15日目の記事です。  
+:::
+
 GitHub Actions は非常に便利な CI/CD 基盤ですが、設定次第では**本番デプロイの権限が想像以上に緩くなってしまう**ことがあります。
 
 本記事では、GitHub Actions と AWS OIDC を利用した既存のデプロイフローについて、以下の内容を整理してご紹介します。
