@@ -1,10 +1,10 @@
 ---
-title: "GitHub Actions で『誰でも本番環境を壊せる』状態を潰す"
+title: "『GitHub Actions で誰でも本番環境を壊せる』状態を潰す"
 emoji: "🙌"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["GitHub Actions", "CI/CD", "AWS", "セキュリティ"]
 publication_name: "japagate"
-published: false
+published: true
 ---
 
 GitHub Actions は非常に便利な CI/CD 基盤ですが、設定次第では**本番デプロイの権限が想像以上に緩くなってしまう**ことがあります。
