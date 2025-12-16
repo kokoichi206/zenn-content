@@ -8,7 +8,7 @@ published: true
 ---
 
 :::message
-この記事は、ジャパゲートシステムズ Advent Calendar 2025 15日目の記事です。  
+この記事は、ジャパゲートシステムズ Advent Calendar 2025 15 日目の記事です。  
 :::
 
 GitHub Actions は非常に便利な CI/CD 基盤ですが、設定次第では**本番デプロイの権限が想像以上に緩くなってしまう**ことがあります。
