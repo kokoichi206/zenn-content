@@ -8,7 +8,7 @@ published: false
 ---
 
 :::message
-この記事は、ジャパゲートシステムズ Advent Calendar 2025 16日目の記事です。
+この記事は、ジャパゲートシステムズ Advent Calendar 2025 16 日目の記事です。
 :::
 
 AI アプリケーションの開発において、どの LLM プロバイダーを使うか・複数のモデルをどう管理するかは悩ましい問題です。
@@ -50,7 +50,7 @@ export const getLasagnaRecipe = async (modelName: string) => {
 レート制限とも被りますが、Tier からの解放も大きなメリットです。
 
 OpenAI などの API を直接使う場合、アカウントのそれまでの使用量に応じて [Tier](https://platform.openai.com/docs/guides/rate-limits) が決まり、レート制限が大きく異なります。
-一方 OpenRouter の場合は、free モデルのの場合と有料モデルの場合で異なるのですが、『[DDOS レベルのものを緩めに弾く](https://openrouter.ai/docs/api/reference/limits)』程度のものだと理解しています。
+一方 OpenRouter の場合は、free モデルの場合と有料モデルの場合で異なるのですが、『[DDOS レベルのものを緩めに弾く](https://openrouter.ai/docs/api/reference/limits)』程度のものだと理解しています。
 
 ## 既存の SDK をそのまま利用できる
 
@@ -134,7 +134,7 @@ console.log(data.choices[0].message.content);
 ## 無料モデルで手軽に試せる
 
 OpenRouter には[無料で使えるモデル（モデル id の末尾に ":free" が付くもの）](https://openrouter.ai/models?fmt=cards&q=free)が大量に用意されています。
-（[公開日初日から大量の Activity](https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b:free/activity) が見れて面白いです。）
+（[公開日初日から大量の Activity](https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b:free/activity) が見られて面白いです。）
 
 結構な頻度で追加されては消えているのですが、コストを気にせず試すことができるのは大きなメリットです。
 
