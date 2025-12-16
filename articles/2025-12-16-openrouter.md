@@ -2,9 +2,9 @@
 title: "いま OpenRouter を始めるべき 5 つの理由"
 emoji: "🐈‍⬛"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["OpenRouter", "LLM", "AI", "OpenAI", "Claude"]
+topics: ["OpenRouter", "LLM", "AI"]
 publication_name: "japagate"
-published: false
+published: true
 ---
 
 :::message
