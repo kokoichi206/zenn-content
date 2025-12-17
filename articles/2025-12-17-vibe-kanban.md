@@ -2,9 +2,9 @@
 title: "Vibe-Kanban でプロジェクトが複数リポジトリに対応したのがアツイ！"
 emoji: "🏷️"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["VibeKanban", "AI", "開発効率化"]
+topics: ["Vibe Kanban", "AI"]
 publication_name: "japagate"
-published: false
+published: true
 ---
 
 :::message
