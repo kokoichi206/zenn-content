@@ -51,10 +51,15 @@ nodejs 20.18.1
 各 asdf の nodejs plugin のバージョンからアンインストールして reshim を実行しました。
 
 ```bash
-# どの nodejs に入ってるのか特定がだるいので、全部から消す
+# どの nodejs に入ってるのか特定がだるいので、全部から消す。
 for v in $(asdf list nodejs | tr -d ' '); do
   echo "=== Node $v ==="
-  ASDF_NODEJS_VERSION="$v" asdf exec npm -g uninstall <package-name>
+  ASDF_NODEJS_VERSION="$v" asdf exec npm -g uninstall @anthropic-ai/claude-code
+  # uninstall でうまくいかないケースがあったため、念のため実態からも削除する。
+  rm -rf "$dir/lib/node_modules/@anthropic-ai/claude-code"
+  rm -rf "$dir/lib/node_modules/@anthropic-ai/claude"
+  rm -rf "$dir/lib/node_modules/claude"
+  rm -f  "$dir/bin/claude"
 done
 
 asdf reshim nodejs
