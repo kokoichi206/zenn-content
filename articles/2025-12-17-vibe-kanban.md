@@ -8,7 +8,7 @@ published: true
 ---
 
 :::message
-この記事は、ジャパゲートシステムズ Advent Calendar 2025 17 日目の記事です。
+この記事は、[ジャパゲートシステムズ Advent Calendar 2025](https://qiita.com/advent-calendar/2025/japagate-systems) 17 日目の記事です。
 :::
 
 AI コーディングエージェントを活用した開発が当たり前になってきた昨今、**複数の**エージェントを効率よく並列実行・管理したいというニーズが高まっています。

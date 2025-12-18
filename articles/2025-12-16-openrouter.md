@@ -8,7 +8,7 @@ published: true
 ---
 
 :::message
-この記事は、ジャパゲートシステムズ Advent Calendar 2025 16 日目の記事です。
+この記事は、[ジャパゲートシステムズ Advent Calendar](https://qiita.com/advent-calendar/2025/japagate-systems) 2025 16 日目の記事です。
 :::
 
 AI アプリケーションの開発において、どの LLM プロバイダーを使うか・複数のモデルをどう管理するかは悩ましい問題です。
