@@ -286,7 +286,7 @@ runner      1978    1976      \_ terraform apply -target=module.lambda.aws_ecr_r
 
 ### 方法2: input=false フラグをつける（推奨）
 
-[#440](https://github.com/hashicorp/setup-terraform/pull/440) でも指摘されている通り、workflow で永遠に入力待ちになるのを防ぐには `input=false` フラグを指定するのが適切です。
+[#440](https://github.com/hashicorp/setup-terraform/pull/440) でも指摘されている通り、workflow 実行中に入力待ちでハングするのを防ぐには `input=false` フラグを指定するのが適切です。
 （README の例も、全部そのように変わってた。）
 
 ## Links
