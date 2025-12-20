@@ -119,7 +119,7 @@ SIGINT or SIGTERM が送信されるのだろうと推測していたのです�
 
 ### 実行結果1.2: 親プロセスの死を検知
 
-PPID (親プロセスID) を監視してみると、興味深い発見がありました。
+PPID (親プロセス ID) を監視してみると、興味深い発見がありました。
 
 ```
 Still alive at 11:24:21 (PID=2261, PPID=2260)
@@ -133,7 +133,7 @@ cancel workflow を押したちょっと後で PPID が 2260 から 1 に変わ�
 これは以下のようなことを意味し、シグナルは子プロセスに直接送られていないと推測されます。
 
 1. キャンセル時に親プロセス (bash) だけが kill される
-2. 子プロセスが orphan になり init (PID=1) に引き取られる
+2. 子プロセスが orphan となり init (PID=1) に引き取られる
 
 ## 調査2: exec を使って bash を置き換える
 
@@ -167,7 +167,7 @@ Received signal: terminated at 2025-12-20 11:34:34    # SIGTERM!
 
 ## 調査3: terraform process を exec する
 
-調査2 より exec を使って terraform を bash を経由せずに実行すればいいのではないかと推測されますが、実際にはうまくいきませんでした。
+調査 2 より exec を使って terraform を bash を経由せずに実行すればいいのではないかと推測されますが、実際にはうまくいきませんでした。
 （結果略）
 
 ## 調査4: なぜ Terraform には届かないのか
@@ -269,7 +269,7 @@ runner      1980    1977      |   \_ ps -ef --forest
 runner      1978    1976      \_ terraform apply -target=module.lambda.aws_ecr_repository.lambda -target=module.lambda.aws_ecr_lifecycle_policy.lambda -target=module.lambda.aws_ecr_repository.python_lambda -target=module.lambda.aws_ecr_lifecycle_policy.python_lambda
 ```
 
-この場合に terraform apply をすると input 待ちが表示され正常にプロセスが終了することがわかります。
+この場合に terraform apply をすると input 待ちが表示され、プロセスが即時終了することがわかります。
 （input 待ちでハングしないのは tty に接続してないため標準入力が閉じられてるからと思ってるのですが、調査の詳細は割愛します。）
 
 ## 解決策
@@ -286,7 +286,7 @@ runner      1978    1976      \_ terraform apply -target=module.lambda.aws_ecr_r
 
 ### 方法2: input=false フラグをつける（推奨）
 
-[#440](https://github.com/hashicorp/setup-terraform/pull/440) でも指摘されているように、ci で永遠に入力待ちになるのを防ぐには `input=false` フラグを指定するのが適切です。
+[#440](https://github.com/hashicorp/setup-terraform/pull/440) でも指摘されている通り、workflow で永遠に入力待ちになるのを防ぐには `input=false` フラグを指定するのが適切です。
 （README の例も、全部そのように変わってた。）
 
 ## Links
