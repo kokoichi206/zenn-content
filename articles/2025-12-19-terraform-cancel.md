@@ -2,7 +2,7 @@
 title: "GitHub Actions で Terraform がキャンセルされない問題を深掘りする"
 emoji: "🐈‍⬛"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["GitHubActions", "Terraform", "CI"]
+topics: ["GitHubActions", "Terraform", "CI/CD"]
 publication_name: "japagate"
 published: true
 ---
@@ -16,8 +16,9 @@ GitHub Actions で `terraform apply` を実行中にワークフローをキャ�
 
 ## 先にまとめ
 
-- 必須の terraform variable が設定されずに GitHub Actions がハングし続けていた
-  - [Cancel Workflow](https://docs.github.com/ja/actions/how-tos/manage-workflow-runs/cancel-a-workflow-run) も効かない
+- GitHub Actions で terraform apply がハングし続けていた
+  - 必須の terraform variable が設定されていなかったことが原因
+  - [Cancel Workflow](https://docs.github.com/ja/actions/how-tos/manage-workflow-runs/cancel-a-workflow-run) が何故か効かない
 - `hashicorp/setup-terraform` の `terraform_wrapper` による node process での wrap が原因
   - Node.js ラッパーがシグナルを Terraform に転送しない
 - 解決策
@@ -31,9 +32,9 @@ GitHub Actions で `terraform apply` を実行中にワークフローをキャ�
 	# (他にどんな影響が出るかは確認しきれてないです。)
     terraform_wrapper: false
 - name: Terraform Apply
-run: |
-  # --input=false で入力待ちを回避し、未指定の場合に即時で落ちるようにする。
-  terraform apply -auto-approve -input=false
+  run: |
+    # --input=false で入力待ちを回避し、未指定の場合に即時で落ちるようにする。
+    terraform apply -auto-approve -input=false
 ```
 
 ## 問題の発端
@@ -54,7 +55,7 @@ GitHub Actions で Terraform を使った CI/CD パイプラインを運用し�
 
 ### シグナル監視プログラムを作成
 
-<details><summary>Go でシグナルを監視するプログラムを作成</summary>
+:::details Go でシグナルを監視するプログラムを作成
 
 main.go
 
@@ -93,7 +94,7 @@ func main() {
 }
 ```
 
-</details>
+:::
 
 ```yaml
 # .github/workflows/cancel-test.yml
@@ -174,7 +175,7 @@ Received signal: terminated at 2025-12-20 11:34:34    # SIGTERM!
 
 Terraform がキャンセルされない問題にあたり、プロセスツリーを確認してみました。
 
-<details><summary>プロセスツリーの確認 job step と結果詳細</summary>
+:::details プロセスツリーの確認 job step と結果詳細
 
 ``` yaml
 - name: Terraform apply with process monitoring
@@ -211,7 +212,7 @@ runner      2013    1984  0 11:47 ?        00:00:00              |   \_ ps -ef -
 runner      1985    1983  0 11:47 ?        00:00:00              \_ node /home/runner/work/_temp/42d3384c-c4ec-401a-8f11-4cf7bdee2414/terraform apply -target=module.lambda.aws_ecr_repository.lambda -target=module.lambda.aws_ecr_lifecycle_policy.lambda -target=module.lambda.aws_ecr_repository.python_lambda -target=module.lambda.aws_ecr_lifecycle_policy.python_lambda
 ```
 
-</details>
+:::
 
 ```
 runner      1983    1822  \_ /usr/bin/bash -e /home/runner/work/_temp/c313a579-3e4f-4f65-8485-c3d85c3007a2.sh
@@ -244,7 +245,7 @@ runner      1985    1983      \_ node /home/runner/work/_temp/42d3384c-c4ec-401a
     terraform_wrapper: false
 ```
 
-<details><summary>調査 4 と同じ実行の結果詳細</summary>
+:::details 調査 4 と同じ実行の結果詳細
 
 ```sh
 runner      1773       1  0 11:49 ?        00:00:00 /opt/hca/hosted-compute-agent
@@ -258,7 +259,7 @@ runner      1980    1977  0 11:50 ?        00:00:00              |   \_ ps -ef -
 runner      1978    1976  0 11:50 ?        00:00:00              \_ terraform apply -target=module.lambda.aws_ecr_repository.lambda -target=module.lambda.aws_ecr_lifecycle_policy.lambda -target=module.lambda.aws_ecr_repository.python_lambda -target=module.lambda.aws_ecr_lifecycle_policy.python_lambda
 ```
 
-</details>
+:::
 
 結果は以下のようになり、無事 bash の子プロセスとして terraform が実行されました。
 
@@ -270,7 +271,7 @@ runner      1978    1976      \_ terraform apply -target=module.lambda.aws_ecr_r
 ```
 
 この場合に terraform apply をすると input 待ちが表示され、プロセスが即時終了することがわかります。
-（input 待ちでハングしないのは tty に接続してないため標準入力が閉じられてるからと思ってるのですが、調査の詳細は割愛します。）
+（input 待ちでハングしないのは CI 環境では tty に接続しておらず stdin がパイプとして扱われ EOF を返すためと思われますが、調査の詳細は割愛します。）
 
 ## 解決策
 
