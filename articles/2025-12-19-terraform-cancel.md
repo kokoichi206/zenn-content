@@ -4,7 +4,7 @@ emoji: "🐈‍⬛"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["GitHubActions", "Terraform", "CI"]
 publication_name: "japagate"
-published: false
+published: true
 ---
 
 :::message
