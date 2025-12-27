@@ -15,7 +15,7 @@ DB にためられたコンバージョンデータを daily で集計して Sla
 
 ## まとめ
 
-- 定期集計してSlackに通知する仕組みを **SupabaseのDB拡張だけ** で作った
+- 定期集計して Slack に通知する仕組みを **Supabase の DB 拡張だけ** で作った
   - [pg_cron](https://supabase.com/docs/guides/database/extensions/pg_cron) で定期実行
   - [pg_net](https://supabase.com/docs/guides/database/extensions/pg_net) で Slack に直接 Webhook 通知
 - Edge Function 等は一切使っていない
@@ -148,7 +148,7 @@ Supabase の DB 拡張には、ベースとする Postgres の持つ拡張機能
 以下に自分が気になってるものを挙げておきますので、みなさんのおすすめや気になりも是非教えてください！
 
 - Realtime
-  - DBの変更をリアルタイムに購読できる
+  - DB の変更をリアルタイムに購読できる
 - pgjwt
 - pgvector
 - pg_graphql
